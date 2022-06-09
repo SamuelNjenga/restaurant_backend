@@ -1,9 +1,8 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
-  class table_registration extends Model {
+  class TableRegistration extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,14 +12,28 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  table_registration.init({
-    level: DataTypes.INTEGER,
-    booked: DataTypes.BOOLEAN,
-    label: DataTypes.STRING,
-    arrived: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'table_registration',
-  });
-  return table_registration;
+  TableRegistration.init(
+    {
+      level: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      booked: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      label: { type: DataTypes.STRING, allowNull: false },
+      arrived: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: "TableRegistration",
+    }
+  );
+  return TableRegistration;
 };
